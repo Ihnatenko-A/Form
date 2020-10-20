@@ -9,7 +9,7 @@ import {
 import cls from './CompanyDetails.module.scss';
 
 
-function validateByField(field, fieldState) {
+const validateByField = (field, fieldState) => {
    
     // if (field === 'companyName' && fieldState.value.length < 3) return false
     
@@ -28,23 +28,36 @@ function validateByField(field, fieldState) {
     return true
 }
 
-function validateSubmition(state) {
-    console.log('validate')
-    for (const prop in state) {
-        console.log(`${prop}: ${state[prop].value}`)
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'input':
+            // console.log('input')            
+            return {...state, [action.key]: {value: action.value, error: false}}
+        
+        case 'focusOut':
+            // console.log('focusOut')
+            return { ...state, [action.key]: {...state[action.key], error: action.error}}
+
+        case 'submit':
+            // console.log('submit')
+            // if (validateSubmition(state)) {
+                return state
+            // }
+        case 'setError':
+            // console.log(action)
+            return { ...state, [action.key]: {...state[action.key], error: true}  }
+        default:
+            throw new Error('Unexpected action');
     }
-
-    return true
-    // console.log(state)
 }
-
 
 const CompanyDetailsForm = () => {
 
     const initialState = {
         companyName: {
             value: '',
-            // error: false,
+            error: false,
         },
         numberOfPeople: {
             value: '',
@@ -64,37 +77,39 @@ const CompanyDetailsForm = () => {
         }
     }
 
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case 'input':
-                console.log(action)
-                // if (action.key == 'numberOfPeople') {
-                //     if (action.value > 100 || action.value < 1) {
-                //         return { ... state, [action.key]: {value: action.value, error: true} }
-                //     }
-                // }
-                
-                return {...state, [action.key]: {value: action.value, error: false}}
-            
-            case 'fousOut':
-                console.log(action)
-                if (!validateByField(action.key, state[action.key])) {
-                    return {...state, [action.key]: {value: action.value || '', error: true} }
-                } else {
-                    return {...state, [action.key]: {...state[action.key], error: false}}
-                }
-            
-            case 'submit':
-                console.log('submit')
-                if (validateSubmition(state)) {
-                    return state
-                }
-            default:
-                throw new Error('Unexpected action');
+    // useEffect(() => console.log('render'));
+
+    const onBlur = (e) => {
+       
+        if (!validateByField(e.target.name, state[e.target.name])) {
+            dispatch({type: 'focusOut', key: e.target.name, error: true})
+        } else {
+            dispatch({type: 'focusOut', key: e.target.name, error: false})
         }
     }
 
-    useEffect(() => console.log('render'))
+    const onSubmit = () => {
+        let error = false;
+        for (const prop in state) {
+            if (validateByField(prop, state[prop])) {
+                // console.log(prop, 'valid')
+            } else {
+                error = true;
+                dispatch({type: 'setError', key: prop})
+            }
+        }
+
+        if (!error) {
+            for (const prop in state) {
+                console.log(`${prop}: ${state[prop].value}`)
+            }
+        }
+
+    }
+
+    const onInput = (e) => {
+        dispatch({type: 'input', key: e.target.name, value: e.target.value})
+    }
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -114,9 +129,9 @@ const CompanyDetailsForm = () => {
                                 placeholder="Type text"
                                 label="Your company name"
                                 errorMessage="This field in required"
-                                onChange={e => dispatch({type: 'input', key: e.target.name, value: e.target.value})}
+                                onChange={onInput}
                                 // error={state.companyName.error}
-                                // onBlur={(e) => dispatch({type: 'fousOut', key: e.target.name})}
+                                // onBlur={(e) => dispatch({type: 'focusOut', key: e.target.name})}
                             />
                             <FormInput
                                 required
@@ -126,9 +141,9 @@ const CompanyDetailsForm = () => {
                                 inputName='numberOfPeople'
                                 placeholder="1-99"
                                 errorMessage="This field in required"
-                                onChange={e => dispatch({type: 'input', key: e.target.name, value: e.target.value})}
+                                onChange={onInput}
                                 error={state.numberOfPeople.error}
-                                onBlur={(e) => dispatch({type: 'fousOut', key: e.target.name})}
+                                onBlur={onBlur}
                             />
                             {/* <h2>{state.companyName.value}</h2> */}
                         </div>
@@ -140,9 +155,9 @@ const CompanyDetailsForm = () => {
                                 placeholder="Design, Marketing, Development, etc."
                                 label="Business area"
                                 errorMessage="This field in required"
-                                onChange={e => dispatch({type: 'input', key: e.target.name, value: e.target.value})}
+                                onChange={onInput}
                                 error={state.businessArea.error}
-                                onBlur={(e) => dispatch({type: 'fousOut', key: e.target.name})}
+                                onBlur={onBlur}
                             />
                         </div>
 
@@ -153,9 +168,9 @@ const CompanyDetailsForm = () => {
                                 placeholder="Type text"
                                 label="Description"
                                 errorMessage="This field in required"
-                                onChange={e => dispatch({type: 'input', key: e.target.name, value: e.target.value})}
+                                onChange={onInput}
                                 error={state.businessDescription.error}
-                                onBlur={(e) => dispatch({type: 'fousOut', key: e.target.name})}
+                                onBlur={onBlur}
                             />
                         </div>
 
@@ -167,11 +182,11 @@ const CompanyDetailsForm = () => {
                                 // placeholder="Add file as attachment"
                                 label="Add file as attachment"
                                 errorMessage="This field in required"
-                                onChange={e => dispatch({type: 'input', key: e.target.name, value: e.target.files})}
+                                onChange={onInput}
                                 // error={state.businessArea.error}
                                 filesCount={state.files.value}
 
-                                // onBlur={(e) => dispatch({type: 'fousOut', key: e.target.name})}
+                                // onBlur={(e) => dispatch({type: 'focusOut', key: e.target.name})}
                             />
                         </div>
 
@@ -179,7 +194,7 @@ const CompanyDetailsForm = () => {
                             <FormButton
                                 text="Submit"
                                 color="#DA3F5B"
-                                onClick={() => {dispatch({type: 'submit'})}}
+                                onClick={onSubmit}
                             />
                         </div>
                         
