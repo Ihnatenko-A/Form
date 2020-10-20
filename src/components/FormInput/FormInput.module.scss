@@ -1,0 +1,48 @@
+.defaultInput {
+    box-sizing: border-box;
+    background: #F9F9F9;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 14px 10px;
+    color: #A7A7A7;
+    width: 100%;
+    border: 1px solid transparent;
+    // width: calc(100% - 20px);
+    &::placeholder {
+        opacity: .5;
+    }
+    &:focus {
+        // border: none !important;
+        outline: none;
+    }
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding-bottom: 40px;
+    label {
+        font-size: 14px;
+        color: #636363;
+        padding-bottom: 5px;
+        font-weight: bold;
+        span {
+            color: #F15557;
+        }
+    }
+    &.error {
+        input {
+            // color: red;
+            border: 1px solid #F15557;
+        }
+    }
+} 
+
+.errorField {
+    position: absolute;
+    font-size: 12px;
+    color: #F15557;
+    bottom: 20px;
+}

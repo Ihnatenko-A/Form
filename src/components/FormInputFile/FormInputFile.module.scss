@@ -1,0 +1,78 @@
+.defaultInputFile {
+  // box-sizing: border-box;
+  // background: #F9F9F9;
+  // border-radius: 8px;
+  // // min-height: 48px;
+  // font-size: 16px;
+  // padding: 10px;
+  // color: #A7A7A7;
+  // width: 100%;
+  // border: 1px solid transparent;
+  // width: calc(100% - 20px);
+  // &::placeholder {
+  //     opacity: .5;
+  // }
+  // &:focus {
+  //     // border: none !important;
+  //     outline: none;
+  // }
+}
+
+.inputFileWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding-bottom: 40px;
+  input {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+  label {
+      font-size: 14px;
+      color: #636363;
+      padding-bottom: 5px;
+      // font-weight: bold;
+      box-sizing: border-box;
+      background: #F9F9F9;
+      border-radius: 8px;
+      // min-height: 48px;
+      font-size: 16px;
+      padding: 12px 20px;
+      // color: #A7A7A7;
+      width: 100%;
+      border: 1px solid #3333332e;
+      // opacity: ;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      // span {
+      //     color: #F15557;
+      // }
+      svg {
+        position: relative;
+        height: 16px;
+        padding-right: 16px;
+        margin-bottom: -1px;
+      }
+  }
+  &.error {
+      input {
+          // color: red;
+          border: 1px solid #F15557;
+      }
+  }
+} 
+
+.count {
+  font-size: 14px;
+  color: #A7A7A7;
+}
+.errorField {
+  position: absolute;
+  font-size: 12px;
+  color: #F15557;
+  bottom: 20px;
+}

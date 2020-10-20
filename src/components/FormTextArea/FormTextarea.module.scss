@@ -1,0 +1,52 @@
+.defaultTextarea {
+    box-sizing: border-box;
+    background: #F9F9F9;
+    border: none;
+    border-radius: 8px;
+    // min-height: 48px;
+    font-size: 16px;
+    padding: 10px;
+    color: #A7A7A7;
+    width: 100%;
+    border: 1px solid transparent;
+    min-height: 168px;
+    resize: none;
+    // width: calc(100% - 20px);
+    &::placeholder {
+        opacity: .5;
+    }
+    &:focus {
+        // border: none !important;
+        outline: none;
+    }
+}
+
+.textareaWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding-bottom: 40px;
+    label {
+        font-size: 14px;
+        color: #636363;
+        padding-bottom: 5px;
+        font-weight: bold;
+        span {
+            color: #F15557;
+        }
+    }
+    &.error {
+        textarea {
+            // color: red;
+            border: 1px solid #F15557;
+        }
+    }
+} 
+
+.errorField {
+    position: absolute;
+    font-size: 12px;
+    color: #F15557;
+    bottom: 20px;
+}

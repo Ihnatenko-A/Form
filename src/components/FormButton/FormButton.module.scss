@@ -1,0 +1,16 @@
+button {
+    color: #fff;
+    border-radius: 8px;
+    padding: 16px 40px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: .3s;
+    cursor: pointer;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        filter: brightness(80%)
+    }
+}
