@@ -19,7 +19,7 @@ const FormInput = ({
             className={`${cls.inputWrapper} ${error && cls.error}`}
             style={{width: width}}
         >
-            <label htmlFor={inputName}>{label}{required && <span>*</span> }</label>
+            <label htmlFor={inputName}>{label}{required && <span> *</span> }</label>
             <input
                 
                 className={cls.defaultInput}

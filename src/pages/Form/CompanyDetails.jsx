@@ -1,18 +1,17 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import {
     FormInput,
     FormCard,
     FormTextarea,
     FormInputFile,
-    FormButton
+    FormButton,
+    FormStepper
 } from '../../components'
 import cls from './CompanyDetails.module.scss';
 
 
 const validateByField = (field, fieldState) => {
-   
-    // if (field === 'companyName' && fieldState.value.length < 3) return false
-    
+
     if (field === 'numberOfPeople' )  {
         if ( fieldState.value > 99 || fieldState.value < 1) return false
     }
@@ -31,21 +30,13 @@ const validateByField = (field, fieldState) => {
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'input':
-            // console.log('input')            
+        case 'input':           
             return {...state, [action.key]: {value: action.value, error: false}}
-        
         case 'focusOut':
-            // console.log('focusOut')
             return { ...state, [action.key]: {...state[action.key], error: action.error}}
-
         case 'submit':
-            // console.log('submit')
-            // if (validateSubmition(state)) {
-                return state
-            // }
+            return state
         case 'setError':
-            // console.log(action)
             return { ...state, [action.key]: {...state[action.key], error: true}  }
         default:
             throw new Error('Unexpected action');
@@ -77,10 +68,10 @@ const CompanyDetailsForm = () => {
         }
     }
 
-    // useEffect(() => console.log('render'));
+    const [step, setStep] = useState(0);
+
 
     const onBlur = (e) => {
-       
         if (!validateByField(e.target.name, state[e.target.name])) {
             dispatch({type: 'focusOut', key: e.target.name, error: true})
         } else {
@@ -115,9 +106,12 @@ const CompanyDetailsForm = () => {
 
     return (
         <div className={cls.body}>
-            <h1>Your first project</h1>
-            <div><h2>stepper</h2></div>
-            <div className={cls.card}>
+            <h1 style={{color: '#fff'}}>Your first project</h1>
+            <FormStepper
+                active={step}
+                setActive={setStep}
+            />
+            {step === 0 && <div className={cls.card}>
                 <FormCard
                     height="auto"
                 >
@@ -130,8 +124,7 @@ const CompanyDetailsForm = () => {
                                 label="Your company name"
                                 errorMessage="This field in required"
                                 onChange={onInput}
-                                // error={state.companyName.error}
-                                // onBlur={(e) => dispatch({type: 'focusOut', key: e.target.name})}
+                                
                             />
                             <FormInput
                                 required
@@ -145,7 +138,6 @@ const CompanyDetailsForm = () => {
                                 error={state.numberOfPeople.error}
                                 onBlur={onBlur}
                             />
-                            {/* <h2>{state.companyName.value}</h2> */}
                         </div>
 
                         <div className={cls.companyRow}>
@@ -176,17 +168,12 @@ const CompanyDetailsForm = () => {
 
                         <div className={cls.companyRow}>
                             <FormInputFile
-                                // required
                                 multiple
                                 inputName='files'
-                                // placeholder="Add file as attachment"
                                 label="Add file as attachment"
                                 errorMessage="This field in required"
                                 onChange={onInput}
-                                // error={state.businessArea.error}
                                 filesCount={state.files.value}
-
-                                // onBlur={(e) => dispatch({type: 'focusOut', key: e.target.name})}
                             />
                         </div>
 
@@ -202,6 +189,10 @@ const CompanyDetailsForm = () => {
                     </>
                 </FormCard>
             </div>
+}
+            {step === 1 && <FormCard>2</FormCard>}
+
+            {step === 2 && <FormCard>3</FormCard>}
         </div>
     )
 }

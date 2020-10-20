@@ -20,7 +20,7 @@ const FormTextarea = ({
             className={`${cls.textareaWrapper} ${error && cls.error}`}
             style={{width: width}}
         >
-            <label htmlFor={inputName}>{label}{required && <span>*</span> }</label>
+            <label htmlFor={inputName}>{label}{required && <span> *</span> }</label>
             <textarea
                 
                 className={cls.defaultTextarea}
