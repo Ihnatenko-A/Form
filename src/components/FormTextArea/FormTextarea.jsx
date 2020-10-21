@@ -13,11 +13,12 @@ const FormTextarea = ({
     onChange,
     required,
     errorMessage,
+    className = '',
     onBlur = () => {},
 
 }) => (
         <div 
-            className={`${cls.textareaWrapper} ${error && cls.error}`}
+            className={`${cls.textareaWrapper} ${error && cls.error} ${className}`}
             style={{width: width}}
         >
             <label htmlFor={inputName}>{label}{required && <span> *</span> }</label>

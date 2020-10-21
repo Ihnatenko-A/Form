@@ -2,8 +2,8 @@ import React from 'react';
 import cls from './FormCard.module.scss';
 
 
-const FormCard = ({children, height = 800, width = 600}) => (
-    <div className={cls.card} style={{height: height, width: width}}>
+const FormCard = ({children, className = ''}) => (
+    <div className={`${cls.card} ${className}`}>
         {children}
     </div>
 )

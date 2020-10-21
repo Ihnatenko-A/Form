@@ -6,18 +6,19 @@ const FormInput = ({
     type = 'text',
     // dispatch,
     placeholder,
-    width = '100%',
+    // width = '100%',
     label,
-    error,
+    error = '',
     onChange,
     required,
     errorMessage,
+    className = '',
     onBlur = () => {},
 
 }) => (
         <div 
-            className={`${cls.inputWrapper} ${error && cls.error}`}
-            style={{width: width}}
+            className={`${cls.inputWrapper} ${error && cls.error} ${className}`}
+            // style={{width: width}}
         >
             <label htmlFor={inputName}>{label}{required && <span> *</span> }</label>
             <input

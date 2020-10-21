@@ -13,7 +13,7 @@ import cls from './CompanyDetails.module.scss';
 const validateByField = (field, fieldState) => {
 
     if (field === 'numberOfPeople' )  {
-        if ( fieldState.value > 99 || fieldState.value < 1) return false
+        if ( +fieldState.value > 99 || +fieldState.value < 1) return false
     }
 
     if (field === 'businessArea') {
@@ -102,6 +102,10 @@ const CompanyDetailsForm = () => {
         dispatch({type: 'input', key: e.target.name, value: e.target.value})
     }
 
+    const onFileInput = (e) => {
+        dispatch({type: 'input', key: e.target.name, value: e.target.files})
+    }
+
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
@@ -110,15 +114,18 @@ const CompanyDetailsForm = () => {
             <FormStepper
                 active={step}
                 setActive={setStep}
+                className={cls.stepperContainer}
             />
             {step === 0 && <div className={cls.card}>
                 <FormCard
                     height="auto"
+                    // className={cls.card}
                 >
                     <>
                         <div className={cls.companyRow}>
                             <FormInput
-                                width="60%"
+                                // width="60%"
+                                className={cls.companyInput}
                                 inputName='companyName'
                                 placeholder="Type text"
                                 label="Your company name"
@@ -131,9 +138,10 @@ const CompanyDetailsForm = () => {
                                 width="35%"
                                 label="Number of people"
                                 type="number"
+                                className={cls.peopleInput}
                                 inputName='numberOfPeople'
                                 placeholder="1-99"
-                                errorMessage="This field in required"
+                                errorMessage={+state.numberOfPeople === '' ? 'This field in required' : 'Please enter number from 1 to 99'}
                                 onChange={onInput}
                                 error={state.numberOfPeople.error}
                                 onBlur={onBlur}
@@ -143,6 +151,7 @@ const CompanyDetailsForm = () => {
                         <div className={cls.companyRow}>
                             <FormInput
                                 required
+                                className={cls.businessInput}
                                 inputName='businessArea'
                                 placeholder="Design, Marketing, Development, etc."
                                 label="Business area"
@@ -157,6 +166,7 @@ const CompanyDetailsForm = () => {
                             <FormTextarea
                                 required
                                 inputName='businessDescription'
+                                className={cls.textAreaInput}
                                 placeholder="Type text"
                                 label="Description"
                                 errorMessage="This field in required"
@@ -172,7 +182,7 @@ const CompanyDetailsForm = () => {
                                 inputName='files'
                                 label="Add file as attachment"
                                 errorMessage="This field in required"
-                                onChange={onInput}
+                                onChange={onFileInput}
                                 filesCount={state.files.value}
                             />
                         </div>
@@ -182,6 +192,7 @@ const CompanyDetailsForm = () => {
                                 text="Submit"
                                 color="#DA3F5B"
                                 onClick={onSubmit}
+                                className={cls.submitButton}
                             />
                         </div>
                         

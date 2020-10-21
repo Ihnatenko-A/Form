@@ -21,7 +21,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
+    position: relative;
+    // width: 100%;
     padding-bottom: 40px;
     label {
         font-size: 14px;
@@ -44,5 +45,6 @@
     position: absolute;
     font-size: 12px;
     color: #F15557;
-    bottom: 20px;
+    top: 75px;
+    text-align: left;
 }

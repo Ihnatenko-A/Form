@@ -1,7 +1,6 @@
 export { FormInputFile } from './FormInputFile/FormInputFile'
 export { FormInput } from './FormInput/FormInput'
 export { FormCard } from './FormCard/FormCard'
-export { FormRow } from './FormRow/FormRow'
 export { FormTextarea } from './FormTextArea/FormTextarea'
 export { FormButton } from './FormButton/FormButton'
 export { FormStepper } from './FormStepper/FormStepper'

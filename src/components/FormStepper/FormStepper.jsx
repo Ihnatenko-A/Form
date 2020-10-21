@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import cls from './FormStepper.module.scss'
 
 
-const FormStepper = ({active = 1, length = 3, setActive}) => {
-
+const FormStepper = ({
+    active = 1,
+    setActive,
+    className
+}) => {
     return (
-        <div className={cls.stepperContainer}>
+        <div className={`${cls.stepperContainer} ${className || ''}`}>
 
             {new Array(3).fill(undefined).map((i, idx) => (
                 <div onClick={() => setActive(idx)} className={`${cls.step} ${active === idx && cls.stepActive}`} key={idx}>
@@ -15,19 +18,7 @@ const FormStepper = ({active = 1, length = 3, setActive}) => {
                 <span className={cls.divider}/>
             </div>
             ))}
-            
 
-            {/* <div className={`${cls.step} ${active && cls.stepActive}`}>
-                <span className={cls.number}>
-                    2
-                </span>
-            </div>
-
-            <div className={`${cls.step} ${active && cls.stepActive}`}>
-                <span className={cls.number}>
-                    3
-                </span>
-            </div> */}
         </div>
     )
 }

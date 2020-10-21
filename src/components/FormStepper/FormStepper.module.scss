@@ -2,9 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 500px;
+    position: relative;
+    // width: 500px;
     // background-color: lightgrey;
     padding: 30px;
+    @media (max-width: 500px) {
+        padding: 30px 15px;
+    }
 }
 .step:last-child {
     .divider {
@@ -12,23 +16,45 @@
     }
 }
 .step {
-    position: relative;
+    // position: relative;
     width: 30px;
     height: 30px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1E34A5;
+    border-radius: 50%;
+    &:nth-child(1) {
+        .divider {
+            left: 90px;
+            @media (max-width: 500px) {
+                left: 60px;
+            }
+        }
+    }
+    &:nth-child(2) {
+        .divider {
+            right: 90px;
+            @media (max-width: 500px) {
+                right: 60px;
+            }
+        }
+    }
     // &:last-child {
     //     background: red !important;
     // }
     &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        background-color: #1E34A5;
-        height: 100%;
-        width: 100%;
-        border-radius: 50%;
-        z-index: 0;
+        // content: '';
+        // // position: absolute;
+        // position: relative;
+        // // left: 0;
+        // // top: 0;
+        // background-color: #1E34A5;
+        // height: 30px;
+        // width: 30px;
+        // border-radius: 50%;
+        // z-index: 0;
     }
     &:after {
        
@@ -36,8 +62,8 @@
 }
 
 .stepActive {
+    background-color: #DA3F5B;
     &:before {
-        background-color: #DA3F5B;
     }
 }
 
@@ -45,17 +71,27 @@
     // content: '';
     position: absolute;
     height: 1px;
-    width: calc((500px - 90px) / 3);
+    // width: calc((100% - 90px) / 3);
+    width: calc(50% - 135px); // 30 + 30 + 15 + 15 + 15         !!!!  ----  135 equals two side paddings 30px + two steps on sides 30px, + half step in the middle 15px, and paddings 30 + 30;
     background-color: #e8e8e82f;
     top: 50%;
-    right: -156px;
+    // &:nth-child(1) {
+    //     left: 90px;
+    // }
+    // &:nth-child(2) {
+    //     right: 90px;
+    // }
+    // right: -156px;
+    @media (max-width: 500px) {
+        width: calc(50% - 90px);
+    }
     cursor: auto;
 }
 
 .number {
     position: relative;
     z-index: 1;
-    top: calc(50% - 12px);
+    // top: calc(50% - 12px);
     color: #fff;
     font-weight: bold;
 }

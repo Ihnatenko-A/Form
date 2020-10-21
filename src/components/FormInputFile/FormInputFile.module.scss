@@ -32,14 +32,15 @@
   label {
       font-size: 14px;
       color: #636363;
-      padding-bottom: 5px;
+      position: relative;
+      // padding-bottom: 5px;
       // font-weight: bold;
       box-sizing: border-box;
       background: #F9F9F9;
       border-radius: 8px;
       // min-height: 48px;
       font-size: 16px;
-      padding: 12px 20px;
+      padding: 12px 20px 12px 45px;
       // color: #A7A7A7;
       width: 100%;
       border: 1px solid #3333332e;
@@ -52,10 +53,12 @@
       //     color: #F15557;
       // }
       svg {
-        position: relative;
+        position: absolute;
         height: 16px;
         padding-right: 16px;
-        margin-bottom: -1px;
+        // margin-bottom: -1px;
+        bottom: calc(50% - 8px);
+        left: 20px;
       }
   }
   &.error {
@@ -74,5 +77,6 @@
   position: absolute;
   font-size: 12px;
   color: #F15557;
-  bottom: 20px;
+  top: 75px;
+  text-align: left;
 }
