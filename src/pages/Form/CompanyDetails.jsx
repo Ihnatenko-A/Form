@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import {
     FormInput,
     FormCard,
@@ -67,7 +67,10 @@ const CompanyDetailsForm = () => {
             error: false,
         }
     }
-
+    
+    const [state, dispatch] = useReducer(reducer, initialState);
+    
+    
     const [step, setStep] = useState(0);
 
 
@@ -106,7 +109,6 @@ const CompanyDetailsForm = () => {
         dispatch({type: 'input', key: e.target.name, value: e.target.files})
     }
 
-    const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
         <div className={cls.body}>
@@ -119,12 +121,10 @@ const CompanyDetailsForm = () => {
             {step === 0 && <div className={cls.card}>
                 <FormCard
                     height="auto"
-                    // className={cls.card}
                 >
                     <>
                         <div className={cls.companyRow}>
                             <FormInput
-                                // width="60%"
                                 className={cls.companyInput}
                                 inputName='companyName'
                                 placeholder="Type text"
@@ -141,7 +141,7 @@ const CompanyDetailsForm = () => {
                                 className={cls.peopleInput}
                                 inputName='numberOfPeople'
                                 placeholder="1-99"
-                                errorMessage={+state.numberOfPeople === '' ? 'This field in required' : 'Please enter number from 1 to 99'}
+                                errorMessage={state.numberOfPeople.value === '' ? 'This field in required' : 'Please enter number from 1 to 99'}
                                 onChange={onInput}
                                 error={state.numberOfPeople.error}
                                 onBlur={onBlur}
@@ -190,7 +190,6 @@ const CompanyDetailsForm = () => {
                         <div className={cls.companyRow}>
                             <FormButton
                                 text="Submit"
-                                color="#DA3F5B"
                                 onClick={onSubmit}
                                 className={cls.submitButton}
                             />

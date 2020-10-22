@@ -7,14 +7,18 @@
     color: #A7A7A7;
     width: 100%;
     border: 1px solid transparent;
-    // width: calc(100% - 20px);
     &::placeholder {
         opacity: .5;
     }
     &:focus {
-        // border: none !important;
         outline: none;
     }
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+    -moz-appearance: textfield;
 }
 
 .inputWrapper {
@@ -22,7 +26,6 @@
     flex-direction: column;
     align-items: flex-start;
     position: relative;
-    // width: 100%;
     padding-bottom: 40px;
     label {
         font-size: 14px;
@@ -35,7 +38,6 @@
     }
     &.error {
         input {
-            // color: red;
             border: 1px solid #F15557;
         }
     }

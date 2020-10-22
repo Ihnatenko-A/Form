@@ -3,14 +3,10 @@ import cls from './FormInputFile.module.scss';
 
 const FormInputFile = ({
     inputName,
-    // type = 'text',
-    // dispatch,
     placeholder,
-    width = '100%',
     label,
     error,
     onChange,
-    required,
     errorMessage,
     multiple,
     filesCount,
@@ -19,7 +15,6 @@ const FormInputFile = ({
 }) => (
         <div 
             className={`${cls.inputFileWrapper} ${error && cls.error}`}
-            style={{width: width}}
         >
             <label htmlFor={inputName}>
                 <span>

@@ -5,9 +5,7 @@ import cls from './FormTextarea.module.scss';
 const FormTextarea = ({
     inputName,
     type = 'text',
-    // dispatch,
     placeholder,
-    width = '100%',
     label,
     error,
     onChange,
@@ -19,7 +17,6 @@ const FormTextarea = ({
 }) => (
         <div 
             className={`${cls.textareaWrapper} ${error && cls.error} ${className}`}
-            style={{width: width}}
         >
             <label htmlFor={inputName}>{label}{required && <span> *</span> }</label>
             <textarea

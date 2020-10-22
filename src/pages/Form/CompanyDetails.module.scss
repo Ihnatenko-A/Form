@@ -58,10 +58,12 @@
 }
 
 .textAreaInput {
+    width: 100%;
     min-height: 168px;
     height: 168px;
 }
 .submitButton {
+    background-color: #DA3F5B;
     @media (max-width: 550px) {
         text-align: center;
         width: 150px;

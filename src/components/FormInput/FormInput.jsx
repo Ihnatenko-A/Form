@@ -4,9 +4,7 @@ import cls from './FormInput.module.scss';
 const FormInput = ({
     inputName,
     type = 'text',
-    // dispatch,
     placeholder,
-    // width = '100%',
     label,
     error = '',
     onChange,
@@ -18,11 +16,9 @@ const FormInput = ({
 }) => (
         <div 
             className={`${cls.inputWrapper} ${error && cls.error} ${className}`}
-            // style={{width: width}}
         >
             <label htmlFor={inputName}>{label}{required && <span> *</span> }</label>
             <input
-                
                 className={cls.defaultInput}
                 placeholder={placeholder}
                 name={inputName}
