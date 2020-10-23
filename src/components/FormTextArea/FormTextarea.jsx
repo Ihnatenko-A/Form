@@ -12,6 +12,7 @@ const FormTextarea = ({
     required,
     errorMessage,
     className = '',
+    value,
     onBlur = () => {},
 
 }) => (
@@ -27,6 +28,7 @@ const FormTextarea = ({
                 type={type}
                 onChange={e => onChange(e)}
                 onBlur={e => onBlur(e)}
+                value={value}
             />
             <span className={cls.errorField}>{error && errorMessage}</span>
         </div>

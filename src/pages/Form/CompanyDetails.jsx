@@ -131,7 +131,7 @@ const CompanyDetailsForm = () => {
                                 label="Your company name"
                                 errorMessage="This field in required"
                                 onChange={onInput}
-                                
+                                value={state.companyName.value}
                             />
                             <FormInput
                                 required
@@ -145,6 +145,7 @@ const CompanyDetailsForm = () => {
                                 onChange={onInput}
                                 error={state.numberOfPeople.error}
                                 onBlur={onBlur}
+                                value={state.numberOfPeople.value}
                             />
                         </div>
 
@@ -159,6 +160,7 @@ const CompanyDetailsForm = () => {
                                 onChange={onInput}
                                 error={state.businessArea.error}
                                 onBlur={onBlur}
+                                value={state.businessArea.value}
                             />
                         </div>
 
@@ -173,6 +175,7 @@ const CompanyDetailsForm = () => {
                                 onChange={onInput}
                                 error={state.businessDescription.error}
                                 onBlur={onBlur}
+                                value={state.businessDescription.value}
                             />
                         </div>
 

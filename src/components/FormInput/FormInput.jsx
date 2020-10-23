@@ -11,6 +11,7 @@ const FormInput = ({
     required,
     errorMessage,
     className = '',
+    value,
     onBlur = () => {},
 
 }) => (
@@ -25,6 +26,7 @@ const FormInput = ({
                 type={type}
                 onChange={e => onChange(e)}
                 onBlur={e => onBlur(e)}
+                value={value}
             />
             <span className={cls.errorField}>{error && errorMessage}</span>
         </div>
